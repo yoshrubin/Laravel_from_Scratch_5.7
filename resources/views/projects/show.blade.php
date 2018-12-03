@@ -15,8 +15,8 @@
 
 @if ($project->tasks->count())
     <div class="content">
+        <div class="box">
         @foreach ($project->tasks as $task)
-            <div class="box">
                 <form method="POST" action="/tasks/{{ $task->id }}">
                     @method('PATCH')
                     @csrf
@@ -25,8 +25,8 @@
                         {{ $task->description }}
                     </label>
                 </form>
-            </div>
         @endforeach
+        </div>
     </div>
 @endif
 
@@ -35,9 +35,8 @@
     @csrf
     <div class="field">
         <label class="label" for="description"> New Task </label>
-
             <div class="control">
-                <input type="text" class="input" placeholder="New Task" name="description">
+                <input type="text" class="input" placeholder="New Task" name="description" required>
             </div>
     </div>
     <div class="field">
@@ -45,6 +44,8 @@
             <button type="submit" class="button is-link">Add Task</button>
         </div>
     </div>
+
+    @include('errors')
 </form>
     
 @endsection
